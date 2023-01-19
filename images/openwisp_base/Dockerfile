@@ -24,7 +24,7 @@ FROM system AS openwisp_python
 ENV PATH="${PATH}:/home/openwisp/.local/bin"
 ENV PYTHONPATH=/home/openwisp/.local/lib/python3.10/site-packages
 
-RUN pip install --user --upgrade pip~=22.0.4
+RUN pip install --user --upgrade pip~=22.3.1
 # TODO: Remove when next version of openwisp-monitoring is released
 ARG OPENWISP_MONITORING_SOURCE=https://github.com/openwisp/openwisp-monitoring/tarball/67bc8867e677b21de2d9c342670fd16fffb00b8d
 # hadolint ignore=DL3013

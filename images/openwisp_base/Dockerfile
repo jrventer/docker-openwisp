@@ -13,7 +13,7 @@ RUN apt update && \
 RUN apt update && \
     apt install --yes --no-install-recommends \
     gcc libpq-dev libjpeg-dev libffi-dev python3-dev \
-    python3-pip libxml2-dev libxslt1-dev zlib1g-dev g++ procps libterm-readline-gnu-perl
+    python3-pip libxml2-dev libxslt1-dev zlib1g-dev g++ procps
 
 RUN useradd --system --password '' --create-home --shell /bin/bash \
     --gid root --uid 1001 openwisp
@@ -49,11 +49,11 @@ RUN if [ "$OPENWISP_IPAM_SOURCE" != "default" ] ; then \
         pip install --user --upgrade ${OPENWISP_IPAM_SOURCE}; \
     fi
 # TODO: Remove when next version of openwisp-controller is released
-ARG OPENWISP_CONTROLLER_SOURCE=https://github.com/openwisp/openwisp-controller/tarball/d8d8bb81eb8fb6d168dcfb1dc554ae8db5bcd3dc
+#ARG OPENWISP_CONTROLLER_SOURCE=https://github.com/openwisp/openwisp-controller/tarball/d8d8bb81eb8fb6d168dcfb1dc554ae8db5bcd3dc
 # hadolint ignore=DL3013
-RUN if [ "$OPENWISP_CONTROLLER_SOURCE" != "default" ] ; then \
-        pip install --user --upgrade ${OPENWISP_CONTROLLER_SOURCE}; \
-    fi
+#RUN if [ "$OPENWISP_CONTROLLER_SOURCE" != "default" ] ; then \
+#        pip install --user --upgrade ${OPENWISP_CONTROLLER_SOURCE}; \
+#    fi
 ARG OPENWISP_NOTIFICATION_SOURCE=default
 # hadolint ignore=DL3013
 RUN if [ "$OPENWISP_NOTIFICATION_SOURCE" != "default" ] ; then \
@@ -76,7 +76,7 @@ RUN if [ "$DJANGO_X509_SOURCE" != "default" ]; then \
         pip install --user --upgrade --force-reinstall ${DJANGO_X509_SOURCE}; \
     fi
 
-ARG DJANGO_SOURCE=django==4.1.0
+ARG DJANGO_SOURCE=django~=4.0.0
 # hadolint ignore=DL3013
 RUN pip install --user --upgrade ${DJANGO_SOURCE}
 

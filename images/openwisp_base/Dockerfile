@@ -27,30 +27,31 @@ ENV PYTHONPATH=/home/openwisp/.local/lib/python3.10/site-packages
 RUN pip install --user --upgrade pip~=22.3.1
 # TODO: Remove when next version of openwisp-monitoring is released
 #ARG OPENWISP_MONITORING_SOURCE=https://github.com/openwisp/openwisp-monitoring/tarball/67bc8867e677b21de2d9c342670fd16fffb00b8d
+ARG OPENWISP_MONITORING_SOURCE=openwisp-monitoring~=1.0.2
 # hadolint ignore=DL3013
-#RUN pip install --user --upgrade ${OPENWISP_MONITORING_SOURCE}
+RUN pip install --user --upgrade ${OPENWISP_MONITORING_SOURCE}
 
-#ARG OPENWISP_FIRMWARE_SOURCE=openwisp-firmware-upgrader~=1.0.0
+ARG OPENWISP_FIRMWARE_SOURCE=openwisp-firmware-upgrader~=1.0.0
 # hadolint ignore=DL3013
-#RUN pip install --user --upgrade ${OPENWISP_FIRMWARE_SOURCE}
-#ARG OPENWISP_TOPOLOGY_SOURCE=openwisp-network-topology~=1.0.0
+RUN pip install --user --upgrade ${OPENWISP_FIRMWARE_SOURCE}
+ARG OPENWISP_TOPOLOGY_SOURCE=openwisp-network-topology~=1.0.0
 # hadolint ignore=DL3013
-#RUN pip install --user --upgrade ${OPENWISP_TOPOLOGY_SOURCE}
-ARG OPENWISP_RADIUS_SOURCE=openwisp-radius~=1.0.2
+RUN pip install --user --upgrade ${OPENWISP_TOPOLOGY_SOURCE}
+ARG OPENWISP_RADIUS_SOURCE=openwisp-radius~=1.0.0
 # hadolint ignore=DL3013
 RUN pip install --user --upgrade ${OPENWISP_RADIUS_SOURCE}
 
 # here we try to install custom versions of the modules only if the
 # supplied argument does not equal the default value, because
 # otherwise these modules will have already been installed above
-ARG OPENWISP_IPAM_SOURCE=default
+ARG OPENWISP_IPAM_SOURCE=openwisp-controller~=1.0.0
 # hadolint ignore=DL3013
 RUN if [ "$OPENWISP_IPAM_SOURCE" != "default" ] ; then \
         pip install --user --upgrade ${OPENWISP_IPAM_SOURCE}; \
     fi
 # TODO: Remove when next version of openwisp-controller is released
 #ARG OPENWISP_CONTROLLER_SOURCE=https://github.com/openwisp/openwisp-controller/tarball/d8d8bb81eb8fb6d168dcfb1dc554ae8db5bcd3dc
-ARG OPENWISP_CONTROLLER_SOURCE=default
+ARG OPENWISP_CONTROLLER_SOURCE=openwisp-controller~=1.0.0
 # hadolint ignore=DL3013
 RUN if [ "$OPENWISP_CONTROLLER_SOURCE" != "default" ] ; then \
         pip install --user --upgrade ${OPENWISP_CONTROLLER_SOURCE}; \
@@ -60,14 +61,14 @@ ARG OPENWISP_NOTIFICATION_SOURCE=default
 RUN if [ "$OPENWISP_NOTIFICATION_SOURCE" != "default" ] ; then \
         pip install --user --upgrade ${OPENWISP_NOTIFICATION_SOURCE}; \
     fi
-ARG OPENWISP_USERS_SOURCE=default
+ARG OPENWISP_USERS_SOURCE=openwisp-controller~=1.0.2
 # hadolint ignore=DL3013
 RUN if [ "$OPENWISP_USERS_SOURCE" != "default" ] ; then \
         pip install --user --upgrade --force-reinstall ${OPENWISP_USERS_SOURCE}; \
     fi
 # TODO: Remove when next version of openwisp-utils is released
 #ARG OPENWISP_UTILS_SOURCE="openwisp-utils[celery,rest] @ https://github.com/openwisp/openwisp-utils/tarball/502af264431f91f34a604cc7c21e67fa2dd7de0e "
-ARG OPENWISP_UTILS_SOURCE=default
+ARG OPENWISP_UTILS_SOURCE=openwisp-controller~=1.0.0
 # hadolint ignore=DL3013
 RUN if [ "$OPENWISP_UTILS_SOURCE" != "default" ] ; then \
         pip install --user --upgrade --force-reinstall "${OPENWISP_UTILS_SOURCE}"; \

@@ -13,7 +13,7 @@ RUN apt update && \
 RUN apt update && \
     apt install --yes --no-install-recommends \
     gcc libpq-dev libjpeg-dev libffi-dev python3-dev \
-    python3-pip libxml2-dev libxslt1-dev zlib1g-dev g++ procps
+    python3-pip libxml2-dev libxslt1-dev zlib1g-dev g++ procps libterm-readline-gnu-perl
 
 RUN useradd --system --password '' --create-home --shell /bin/bash \
     --gid root --uid 1001 openwisp

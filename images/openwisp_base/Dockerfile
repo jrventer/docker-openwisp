@@ -76,7 +76,7 @@ RUN if [ "$DJANGO_X509_SOURCE" != "default" ]; then \
         pip install --user --upgrade --force-reinstall ${DJANGO_X509_SOURCE}; \
     fi
 
-ARG DJANGO_SOURCE=django~=4.1.0
+ARG DJANGO_SOURCE=django==4.1.0
 # hadolint ignore=DL3013
 RUN pip install --user --upgrade ${DJANGO_SOURCE}
 
